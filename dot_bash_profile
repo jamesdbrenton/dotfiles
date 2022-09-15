@@ -1,0 +1,7 @@
+# https://www.soberkoder.com/unlimited-bash-history/
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTFILE=~/.history
+export HISTTIMEFORMAT="[%F %T] "
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export HISTCONTROL=ignoredups
