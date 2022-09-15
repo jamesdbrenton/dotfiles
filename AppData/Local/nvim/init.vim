@@ -25,12 +25,8 @@ set ttyfast                 " Speed up scrolling in Vim
 " Initialize plugin system
 
 call plug#begin()
-"Plug 'altercation/vim-colors-solarized'
 "Plug 'dbmrq/vim-ditto'
 "Plug 'ctrlpvim/ctrlp'
-"Plug 'honza/vim-snippets'
-"Plug 'junegunn/goyo.vim'
-"Plug 'junegunn/limelight.vim'
 "Plug 'junegunn/vim-easy-align'
 "Plug 'junegunn/vim-peekaboo'
 Plug 'lervag/vimtex'
@@ -38,12 +34,7 @@ Plug 'lervag/vimtex'
 Plug 'reedes/vim-pencil'
 "Plug 'reedes/vim-textobj-quote'
 "Plug 'reedes/vim-textobj-sentence'
-"Plug 'SirVer/ultisnips'
-  "let g:UltiSnipsExpandTrigger="<tab>"
-  "let g:UltiSnipsJumpForwardTrigger="<c-b>"
-  "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "Plug 'reedes/vim-wordy'
-"Plug 'tpope/vim-repeat'
 "Plug 'tpope/vim-repeat'
 "Plug 'tpope/vim-surround'
 call plug#end()
@@ -51,5 +42,5 @@ call plug#end()
 " vimtex configuration
 " Viewer options: One may configure the viewer either by specifying a built-in
 " Or with a generic interface:
-let g:vimtex_view_general_viewer = 'SumatraPDF'
-let g:vimtex_view_general_options = '-reuse-instance --forward-search @tex @line @pdf'
+let g:vimtex_view_general_viewer = 'mupdf'
+"let g:vimtex_view_general_options = '-reuse-instance --forward-search @tex @line @pdf'
