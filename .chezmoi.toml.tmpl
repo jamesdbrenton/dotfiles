@@ -1,0 +1,17 @@
+[cd]
+    {{- if eq .chezmoi.os "windows" }}
+    command = "pwsh"
+    {{- else }}
+    command = "bash"  # Falls back to standard bash on Linux
+    {{- end }}
+
+[shell]
+    {{- if eq .chezmoi.os "windows" }}
+    command = "pwsh"
+    args = ["-NoLogo"]
+    {{- else }}
+    command = "bash"
+    {{- end }}
+
+[edit]
+    command = "nvim"
