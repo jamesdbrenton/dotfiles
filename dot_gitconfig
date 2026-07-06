@@ -1,0 +1,12 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = jamesdbrenton
+	email = james.brenton@cruk.cam.ac.uk
+[init]
+	defaultBranch = main
+[core]
+	excludesfile = C:\\Users\\brento01\\.gitignore_global

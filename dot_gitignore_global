@@ -1,0 +1,13 @@
+# Compiled Typst/LaTeX outputs
+*.pdf
+
+# Microsoft Office / Document artifacts
+*.docx
+*.xlsx
+*.pptx
+
+# Archives and compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
