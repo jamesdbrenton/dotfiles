@@ -1,0 +1,4 @@
+{{- if eq .chezmoi.os "windows" -}}
+.bash_profile
+.inputrc
+{{- end -}}
