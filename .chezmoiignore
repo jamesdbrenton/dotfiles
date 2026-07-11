@@ -1,4 +1,13 @@
-{{- if eq .chezmoi.os "windows" -}}
+# Ignore these files on everything EXCEPT Windows
+{{- if ne .chezmoi.os "windows" }}
+.appdata/
+Documents/WindowsPowerShell/
+{{- end }}
+
+# Ignore Linux/Pi specific configs when on Windows
+{{- if eq .chezmoi.os "windows" }}
 .bash_profile
+.bashrc
 .inputrc
-{{- end -}}
+.config/i3/
+{{- end }}
