@@ -1,6 +1,6 @@
 # Ignore these files on everything EXCEPT Windows
 {{- if ne .chezmoi.os "windows" }}
-.appdata/
+AppData/
 Documents/WindowsPowerShell/
 {{- end }}
 
@@ -9,5 +9,4 @@ Documents/WindowsPowerShell/
 .bash_profile
 .bashrc
 .inputrc
-.config/i3/
 {{- end }}
