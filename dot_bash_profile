@@ -4,5 +4,5 @@
 # If running bash, read the user's .bashrc
 [[ -n "$BASH_VERSION" && -f ~/.bashrc ]] && . ~/.bashrc
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/nvim-linux-arm64/bin:$PATH"
 export EDITOR="$HOME/nvim-linux-arm64/bin/nvim"
