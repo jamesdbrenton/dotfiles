@@ -1,5 +1,8 @@
 IdentitiesOnly yes
 
+Host *.lan
+    StrictHostKeyChecking accept-new
+
 # Linux-specific performance and keep-alive settings
 # Need mkdir -p ~/.ssh/sockets
 {{- if eq .chezmoi.os "linux" }}
