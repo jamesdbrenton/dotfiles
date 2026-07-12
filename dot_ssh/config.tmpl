@@ -1,5 +1,26 @@
 IdentitiesOnly yes
 
+# Linux-specific performance and keep-alive settings
+# Need mkdir -p ~/.ssh/sockets
+{{- if eq .chezmoi.os "linux" }}
+Host *
+    # Keep the connection alive
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    TCPKeepAlive yes
+
+    # Optimum Neovim/SCP Multiplexing
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%r@%h:%p
+    ControlPersist 10m
+{{- end }}
+
+# Universal settings for all machines
+Host github.com
+    HostName github.com
+    User git
+      IdentityFile ~/.ssh/id_ed25519
+
 Host tmp
     HostName 192.168.1.1
     StrictHostKeyChecking no
@@ -14,10 +35,6 @@ Host travel
     Port 22
     User root
       IdentityFile ~/.ssh/id_ed25519
-    # Windows-safe performance tweaks:
-    ServerAliveInterval 15
-    ServerAliveCountMax 3
-    NoHostAuthenticationForLocalhost yes
 
 Host zero
     HostName rpizero2
@@ -25,10 +42,6 @@ Host zero
     Port 22
     User jdb1003
       IdentityFile ~/.ssh/id_ed25519
-    # Windows-safe performance tweaks:
-    ServerAliveInterval 15
-    ServerAliveCountMax 3
-    NoHostAuthenticationForLocalhost yes
 
 Host eax
     HostName eax12.lan
@@ -79,10 +92,6 @@ Host one
     Port 22
     User root
       IdentityFile ~/.ssh/gch4sv3_ed25519
-    # Windows-safe performance tweaks:
-    ServerAliveInterval 15
-    ServerAliveCountMax 3
-    NoHostAuthenticationForLocalhost yes
 
 # openwrt_cuddy
 Host cudy
@@ -120,27 +129,6 @@ Host ar750
     User root
       IdentityFile ~/.ssh/gch4sv3_ed25519
 
-Host mr52
-    HostName meraki_mr52-ap.lan
-    StrictHostKeyChecking yes
-    Port 22
-    User root
-      IdentityFile ~/.ssh/gch4sv3_ed25519
-
-Host ap-303_01
-    HostName ap-303_01.lan
-    StrictHostKeyChecking yes
-    Port 22
-    User root
-      IdentityFile ~/.ssh/gch4sv3_ed25519
-
-Host ap-303_02
-    HostName ap-303_02.lan
-    StrictHostKeyChecking yes
-    Port 22
-    User root
-      IdentityFile ~/.ssh/gch4sv3_ed25519
-
 Host wr841n
     HostName 192.168.1.2
     StrictHostKeyChecking yes
@@ -155,14 +143,6 @@ Host wr703n
     User root
       IdentityFile ~/.ssh/pf-1jfv2p_rsa
 
-# openwrt devolo 1750i ap
-Host devolo
-    HostName devolo_1750i-ap.lan
-    StrictHostKeyChecking yes
-    Port 22
-    User root
-      IdentityFile ~/.ssh/gch4sv3_ed25519
-
 Host iqaudio
     HostName iqaudio
     StrictHostKeyChecking yes
@@ -175,14 +155,6 @@ Host moode
     StrictHostKeyChecking yes
     Port 22
     User james
-      IdentityFile ~/.ssh/gch4sv3_ed25519
-
-# openwrt Linksys EA7500v1
-Host ea7500
-    HostName 192.168.1.1
-    StrictHostKeyChecking yes
-    Port 22
-    User root
       IdentityFile ~/.ssh/gch4sv3_ed25519
 
 Host libreelec
