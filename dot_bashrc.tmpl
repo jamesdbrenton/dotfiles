@@ -1,3 +1,18 @@
+# ==============================================================================
+# 1. ARCHITECTURE & PATH SETTINGS (Must be first)
+# ==============================================================================
+{{- if eq .chezmoi.os "linux" }}
+    {{- if eq .chezmoi.arch "arm64" }}
+        export PATH="$HOME/nvim-linux-arm64/bin:$PATH"
+    {{- else if eq .chezmoi.arch "amd64" }}
+        export PATH="$HOME/nvim-linux-amd64/bin:$PATH"
+    {{- end }}
+{{- end }}
+
+# Set fallback paths and default text editor
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="nvim"
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -111,7 +126,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-#
+# JDB additions
+
 # Set up fzf shell integration dynamically
 eval "$(HOME/nvim-linux-arm64/bin/fzf --bash)"
 
