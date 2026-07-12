@@ -1,7 +1,8 @@
-# https://www.soberkoder.com/unlimited-bash-history/
-export HISTFILESIZE=
-export HISTSIZE=
-export HISTFILE=~/.history
-export HISTTIMEFORMAT="[%F %T] "
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-export HISTCONTROL=ignoredups
+# Load the system-wide profile
+[[ -f /etc/profile ]] && . /etc/profile
+
+# If running bash, read the user's .bashrc
+[[ -n "$BASH_VERSION" && -f ~/.bashrc ]] && . ~/.bashrc
+
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="$HOME/nvim-linux-arm64/bin/nvim"
