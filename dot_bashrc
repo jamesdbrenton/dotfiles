@@ -113,7 +113,7 @@ if ! shopt -oq posix; then
 fi
 #
 # Set up fzf shell integration dynamically
-eval "$(fzf --bash)"
+eval "$(HOME/nvim-linux-arm64/bin/fzf --bash)"
 
 # --------------------------------------------------------
 # OPTIMIZED BASH HISTORY SETTINGS
