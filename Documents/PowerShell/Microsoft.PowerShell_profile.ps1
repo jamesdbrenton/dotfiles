@@ -1,3 +1,6 @@
+# Ensure that remote version on Onedrive has these two lines
+# Use local version maintained by chezmoi in $HOME
+#. "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 $MaximumHistoryCount = 10000
 function gcir ()
 {
