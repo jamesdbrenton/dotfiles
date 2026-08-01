@@ -441,6 +441,12 @@ do
       markdown = true,
     }
   })
+  -- JDB Install vimtex only on desktop/GUI environments
+  if not has_no_gui then
+    vim.pack.add { gh 'lervag/vimtex' }
+    -- Recommended minimal vimtex settings
+    vim.g.vimtex_view_method = 'general'
+  end
 
 end
 
@@ -959,6 +965,42 @@ do
       else
         -- Try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
         treesitter_try_attach(buf, language)
+      end
+
+      -- ============================================================
+      -- JDB: Tree-sitter Python Error Diagnostics Integration
+      -- ============================================================
+      if language == 'python' then
+        local ns = vim.api.nvim_create_namespace('treesitter_python_errors')
+        local function check_ts_errors()
+          local parser = vim.treesitter.get_parser(buf, 'python')
+          if not parser then return end
+          local tree = parser:parse()[1]
+          if not tree then return end
+
+          local diagnostics = {}
+          local query = vim.treesitter.query.parse('python', '(ERROR) @err')
+          for _, node in query:iter_captures(tree:root(), buf) do
+            local start_row, start_col, end_row, end_col = node:range()
+            table.insert(diagnostics, {
+              lnum = start_row,
+              col = start_col,
+              end_lnum = end_row,
+              end_col = end_col,
+              severity = vim.diagnostic.severity.ERROR,
+              message = 'Tree-sitter: Syntax error detected',
+              source = 'treesitter',
+            })
+          end
+          vim.diagnostic.set(ns, buf, diagnostics)
+        end
+
+        -- Check errors on buffer load and text modifications
+        check_ts_errors()
+        vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
+          buffer = buf,
+          callback = check_ts_errors,
+        })
       end
     end,
   })
