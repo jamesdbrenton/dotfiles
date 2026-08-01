@@ -1,6 +1,6 @@
 -- JDB Declare the variable at the file level (outside any blocks)
 -- local is_low_power = false # power saving flag
-local has_no_gui = false -- no GUI e.g. raspberry pi zero 2 
+local has_no_gui = false -- no GUI e.g. raspberry pi zero 2
 
 -- JDB Run check to flip it if on the Pi
 if os.getenv('HASNOGUI') then
@@ -9,10 +9,6 @@ end
 
 -- JDB Prepend the local site directory to Neovim's internal runtimepath
 vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/site")
-
--- JDB Inactive netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 -- ============================================================
 -- SECTION 1: OPTIONS
@@ -429,7 +425,7 @@ do
       },
     },
     plugins = {
-      twilight = { enabled = true }, 
+      twilight = { enabled = true },
     },
   })
 
@@ -437,7 +433,7 @@ do
   -- Initialize the pure-lua wrapping plugin
   vim.pack.add { gh 'andrewferrier/wrapping.nvim' }
   require("wrapping").setup({
-    -- By default, it creates keymaps: 
+    -- By default, it creates keymaps:
     -- [ow for soft wrap mode, ]ow for hard wrap mode, yow to toggle
     create_keymaps = true,
     -- Force typst to always default directly to soft wrap text editing
@@ -457,6 +453,13 @@ do
       ["_"] = "actions.open_cwd",
     },
   })
+
+  -- JDB Install vimtex only on desktop/GUI environments
+  if not has_no_gui then
+    vim.pack.add { gh 'lervag/vimtex' }
+    -- Recommended minimal vimtex settings
+    vim.g.vimtex_view_method = 'general'
+  end
 
 end
 
@@ -975,6 +978,42 @@ do
       else
         -- Try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
         treesitter_try_attach(buf, language)
+      end
+
+      -- ============================================================
+      -- JDB: Tree-sitter Python Error Diagnostics Integration
+      -- ============================================================
+      if language == 'python' then
+        local ns = vim.api.nvim_create_namespace('treesitter_python_errors')
+        local function check_ts_errors()
+          local parser = vim.treesitter.get_parser(buf, 'python')
+          if not parser then return end
+          local tree = parser:parse()[1]
+          if not tree then return end
+
+          local diagnostics = {}
+          local query = vim.treesitter.query.parse('python', '(ERROR) @err')
+          for _, node in query:iter_captures(tree:root(), buf) do
+            local start_row, start_col, end_row, end_col = node:range()
+            table.insert(diagnostics, {
+              lnum = start_row,
+              col = start_col,
+              end_lnum = end_row,
+              end_col = end_col,
+              severity = vim.diagnostic.severity.ERROR,
+              message = 'Tree-sitter: Syntax error detected',
+              source = 'treesitter',
+            })
+          end
+          vim.diagnostic.set(ns, buf, diagnostics)
+        end
+
+        -- Check errors on buffer load and text modifications
+        check_ts_errors()
+        vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
+          buffer = buf,
+          callback = check_ts_errors,
+        })
       end
     end,
   })
