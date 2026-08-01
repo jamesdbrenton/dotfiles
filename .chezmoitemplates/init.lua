@@ -1,3 +1,7 @@
+-- JDB essential to switch off netrw early
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- JDB Declare the variable at the file level (outside any blocks)
 -- local is_low_power = false # power saving flag
 local has_no_gui = false -- no GUI e.g. raspberry pi zero 2
