@@ -1,3 +1,4 @@
+export HASNOGUI
 # Load the system-wide profile
 [[ -f /etc/profile ]] && . /etc/profile
 
