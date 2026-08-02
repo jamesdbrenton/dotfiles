@@ -1,3 +1,4 @@
+
 -- JDB essential to switch off netrw early
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -450,12 +451,20 @@ do
   -- JDB use oil for remote scp editing (netrw inactivated at top of file)
   vim.pack.add { gh 'stevearc/oil.nvim' }
   require("oil").setup({
+    default_file_explorer = true,
     keymaps = {
       ["g?"] = "actions.show_help",
       ["<CR>"] = "actions.select",
       ["-"] = "actions.parent",
       ["_"] = "actions.open_cwd",
     },
+  })
+
+  -- JDB scamp for openwrt machine editing
+  vim.pack.add { gh 'nat-418/scamp.nvim' }
+  require('scamp').setup({
+    -- Optional: pass extra flags to your local scp command if needed
+    scp_options = { 'ConnectTimeout=5' }
   })
 
   -- JDB Install vimtex only on desktop/GUI environments
@@ -1052,3 +1061,4 @@ end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
