@@ -11,3 +11,24 @@
 *.tar.gz
 *.rar
 *.7z
+
+# lualatex/biber/biblatex
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nlo
+*.nls
+*.out
+*.run.xml
+*.tex.bbl
+*.tex.blg
+*.toc
