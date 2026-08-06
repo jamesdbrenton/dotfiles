@@ -12,6 +12,13 @@
 *.rar
 *.7z
 
+# Image files
+*.eps
+*.jpg
+*.jpeg
+*.png
+*.svg
+#
 # lualatex/biber/biblatex
 *.aux
 *.bbl
@@ -19,7 +26,6 @@
 *.blg
 *.fdb_latexmk
 *.fls
-*.eps
 *.idx
 *.ilg
 *.ind
@@ -30,7 +36,6 @@
 *.nls
 *.out
 *.run.xml
-*.svg
 *.tex.bbl
 *.tex.blg
 *.toc
