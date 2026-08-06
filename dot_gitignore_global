@@ -19,6 +19,7 @@
 *.blg
 *.fdb_latexmk
 *.fls
+*.eps
 *.idx
 *.ilg
 *.ind
@@ -29,6 +30,7 @@
 *.nls
 *.out
 *.run.xml
+*.svg
 *.tex.bbl
 *.tex.blg
 *.toc
